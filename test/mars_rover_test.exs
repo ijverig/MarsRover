@@ -3,25 +3,53 @@ defmodule MarsRoverTest do
 
   import MarsRover
 
+  @plateau {4, 6}
+
+  test "move north from 0,0,N" do
+    position_facing_north = {0, 0, :north}
+    assert process_commands(position_facing_north, @plateau, [:move]) == {:ok, {0, 1, :north}}
+  end
+
   test "rotate 180 degress" do
     position_facing_north = {0, 0, :north}
-    assert process_commands(position_facing_north, [:left, :left]) == {0, 0, :south}
-    assert process_commands(position_facing_north, [:right, :right]) == {0, 0, :south}
+
+    commands = ~W/left left/a
+    assert process_commands(position_facing_north, @plateau, commands) == {:ok, {0, 0, :south}}
+
+    commands = ~W/right right/a
+    assert process_commands(position_facing_north, @plateau, commands) == {:ok, {0, 0, :south}}
   end
 
   test "rotate 270 degress" do
     position_facing_south = {0, 0, :south}
-    assert process_commands(position_facing_south, [:left, :left, :left]) == {0, 0, :west}
-    assert process_commands(position_facing_south, [:right, :right, :right]) == {0, 0, :east}
+
+    commands = ~W/left left left/a
+    assert process_commands(position_facing_south, @plateau, commands) == {:ok, {0, 0, :west}}
+
+    commands = ~W/right right right/a
+    assert process_commands(position_facing_south, @plateau, commands) == {:ok, {0, 0, :east}}
   end
 
   test "move from 0,0,N to 3,2,S" do
     commands = ~W/right move move left move move move right move right move/a
-    assert process_commands({0, 0, :north}, commands) == {3, 2, :south}
+    assert process_commands({0, 0, :north}, @plateau, commands) == {:ok, {3, 2, :south}}
   end
 
   test "move from 3,2,S to 0,0,N" do
     commands = ~W/left left move left move left move move move right move move right/a
-    assert process_commands({3, 2, :south}, commands) == {0, 0, :north}
+    assert process_commands({3, 2, :south}, @plateau, commands) == {:ok, {0, 0, :north}}
+  end
+
+  test "start from outside the plateau -9,-9,N" do
+    commands = []
+    assert process_commands({-9, -9, :north}, @plateau, commands) == {:error, :off_plateau}
+
+    commands = ~W/move left move move move move move/a
+    assert process_commands({-9, -9, :north}, @plateau, commands) == {:error, :off_plateau}
+  end
+
+  test "move from 3,2,N to -2,3,W offgrid" do
+    commands = ~W/move left move move move move move/a
+    assert process_commands({3, 2, :north}, @plateau, commands) == {:error, :off_plateau}
   end
 end
