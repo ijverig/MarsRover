@@ -6,28 +6,28 @@ defmodule MarsRoverTest do
   @plateau {4, 6}
 
   test "move north from 0,0,N" do
-    position_facing_north = {0, 0, :north}
-    assert process_commands(position_facing_north, @plateau, [:move]) == {:ok, {0, 1, :north}}
+    position_heading_north = {0, 0, :north}
+    assert process_commands(position_heading_north, @plateau, [:move]) == {:ok, {0, 1, :north}}
   end
 
   test "rotate 180 degress" do
-    position_facing_north = {0, 0, :north}
+    position_heading_north = {0, 0, :north}
 
     commands = ~W/left left/a
-    assert process_commands(position_facing_north, @plateau, commands) == {:ok, {0, 0, :south}}
+    assert process_commands(position_heading_north, @plateau, commands) == {:ok, {0, 0, :south}}
 
     commands = ~W/right right/a
-    assert process_commands(position_facing_north, @plateau, commands) == {:ok, {0, 0, :south}}
+    assert process_commands(position_heading_north, @plateau, commands) == {:ok, {0, 0, :south}}
   end
 
   test "rotate 270 degress" do
-    position_facing_south = {0, 0, :south}
+    position_heading_south = {0, 0, :south}
 
     commands = ~W/left left left/a
-    assert process_commands(position_facing_south, @plateau, commands) == {:ok, {0, 0, :west}}
+    assert process_commands(position_heading_south, @plateau, commands) == {:ok, {0, 0, :west}}
 
     commands = ~W/right right right/a
-    assert process_commands(position_facing_south, @plateau, commands) == {:ok, {0, 0, :east}}
+    assert process_commands(position_heading_south, @plateau, commands) == {:ok, {0, 0, :east}}
   end
 
   test "move from 0,0,N to 3,2,S" do

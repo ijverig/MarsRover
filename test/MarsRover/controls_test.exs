@@ -11,20 +11,21 @@ defmodule MarsRover.ControlsTest do
   end
 
   test "rotations" do
-    position_facing_north = {0, 0, :north}
-    assert Controls.rotate_left(position_facing_north) == {0, 0, :west}
-    assert Controls.rotate_right(position_facing_north) == {0, 0, :east}
+    position_heading_north = {0, 0, :north}
+    assert Controls.rotate_left(position_heading_north) == {0, 0, :west}
 
-    position_facing_south = {0, 0, :south}
-    assert Controls.rotate_left(position_facing_south) == {0, 0, :east}
-    assert Controls.rotate_right(position_facing_south) == {0, 0, :west}
+    assert Controls.rotate_right(position_heading_north) == {0, 0, :east}
 
-    position_facing_west = {0, 0, :west}
-    assert Controls.rotate_left(position_facing_west) == {0, 0, :south}
-    assert Controls.rotate_right(position_facing_west) == {0, 0, :north}
+    position_heading_south = {0, 0, :south}
+    assert Controls.rotate_left(position_heading_south) == {0, 0, :east}
+    assert Controls.rotate_right(position_heading_south) == {0, 0, :west}
 
-    position_facing_east = {0, 0, :east}
-    assert Controls.rotate_left(position_facing_east) == {0, 0, :north}
-    assert Controls.rotate_right(position_facing_east) == {0, 0, :south}
+    position_heading_west = {0, 0, :west}
+    assert Controls.rotate_left(position_heading_west) == {0, 0, :south}
+    assert Controls.rotate_right(position_heading_west) == {0, 0, :north}
+
+    position_heading_east = {0, 0, :east}
+    assert Controls.rotate_left(position_heading_east) == {0, 0, :north}
+    assert Controls.rotate_right(position_heading_east) == {0, 0, :south}
   end
 end
