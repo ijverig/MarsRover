@@ -47,6 +47,13 @@ defmodule MarsRoverTest do
     assert final_position == {0, 0, :north}
   end
 
+  test "move from upper-right 4,6,W in a square and come back" do
+    upper_right = {4, 6, :west}
+    commands = ~W/move left move left move left move left/a
+    {:ok, final_position} = run_commands(upper_right, @plateau, commands)
+    assert final_position == upper_right
+  end
+
   test "start from outside the plateau -9,-9,N" do
     commands = []
     result = run_commands({-9, -9, :north}, @plateau, commands)
@@ -60,6 +67,12 @@ defmodule MarsRoverTest do
   test "move from 3,2,N to -2,3,W offgrid" do
     commands = ~W/move left move move move move move/a
     result = run_commands({3, 2, :north}, @plateau, commands)
+    assert result == {:error, :off_plateau}
+  end
+
+  test "move from 3,5,W to 6,5,E offgrid and back" do
+    commands = ~W/left left move move move left left move move move/a
+    result = run_commands({3, 5, :west}, @plateau, commands)
     assert result == {:error, :off_plateau}
   end
 end
