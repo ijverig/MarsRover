@@ -18,6 +18,8 @@ defmodule MarsRover.MixProject do
   end
 
   defp deps do
-    []
+    [
+      {:mix_test_watch, "~> 0.6", only: :dev, runtime: false}
+    ]
   end
 end
