@@ -1,20 +1,20 @@
 defmodule MarsRover do
-  def process(current_position, command)
+  def process_command(current_position, :move), do: move(current_position)
+  def process_command(current_position, :left), do: rotate_left(current_position)
+  def process_command(current_position, :right), do: rotate_right(current_position)
 
-  def process({x,y,:north}, :move), do: {x, y+1, :north}
-  def process({x,y,:south}, :move), do: {x, y-1, :south}
-  def process({x,y,:west}, :move), do: {x-1, y, :west}
-  def process({x,y,:east}, :move), do: {x+1, y, :east}
+  defp move({x, y, :north}), do: {x, y + 1, :north}
+  defp move({x, y, :south}), do: {x, y - 1, :south}
+  defp move({x, y, :west}), do: {x - 1, y, :west}
+  defp move({x, y, :east}), do: {x + 1, y, :east}
 
-  def process({x,y,:north}, :left), do: {x, y, :west}
-  def process({x,y,:north}, :right), do: {x, y, :east}
+  defp rotate_left({x, y, :north}), do: {x, y, :west}
+  defp rotate_left({x, y, :west}), do: {x, y, :south}
+  defp rotate_left({x, y, :south}), do: {x, y, :east}
+  defp rotate_left({x, y, :east}), do: {x, y, :north}
 
-  def process({x,y,:south}, :left), do: {x, y, :east}
-  def process({x,y,:south}, :right), do: {x, y, :west}
-
-  def process({x,y,:west}, :left), do: {x, y, :south}
-  def process({x,y,:west}, :right), do: {x, y, :north}
-
-  def process({x,y,:east}, :left), do: {x, y, :north}
-  def process({x,y,:east}, :right), do: {x, y, :south}
+  defp rotate_right({x, y, :north}), do: {x, y, :east}
+  defp rotate_right({x, y, :east}), do: {x, y, :south}
+  defp rotate_right({x, y, :south}), do: {x, y, :west}
+  defp rotate_right({x, y, :west}), do: {x, y, :north}
 end
