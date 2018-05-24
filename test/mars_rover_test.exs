@@ -75,4 +75,20 @@ defmodule MarsRoverTest do
     result = run_commands({3, 5, :west}, @plateau, commands)
     assert result == {:error, :off_plateau}
   end
+
+  test "processing several deployments" do
+    plateau = {1, 1}
+
+    deployments = [
+      {{0, 0, :north}, [:move]},
+      {{0, 0, :west}, [:move]},
+      {{0, 0, :east}, [:move]}
+    ]
+
+    assert MarsRover.process_deployments(plateau, deployments) == [
+             {:ok, {0, 1, :north}},
+             {:error, :off_plateau},
+             {:ok, {1, 0, :east}}
+           ]
+  end
 end

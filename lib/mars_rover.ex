@@ -1,6 +1,12 @@
 defmodule MarsRover do
   import MarsRover.{Controls, Plateau}
 
+  def process_deployments(plateau, deployments) do
+    Enum.map(deployments, fn {initial_position, commands} ->
+      run_commands(initial_position, plateau, commands)
+    end)
+  end
+
   def run_commands({x, y, _heading}, {max_x, max_y}, _commands)
       when is_off_plateau(x, y, max_x, max_y),
       do: {:error, :off_plateau}
