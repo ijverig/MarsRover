@@ -16,4 +16,9 @@ defmodule MarsRover do
   defp run_command(current_position, :move), do: move(current_position)
   defp run_command(current_position, :left), do: rotate_left(current_position)
   defp run_command(current_position, :right), do: rotate_right(current_position)
+
+  def version do
+    {:ok, version} = :application.get_key(:mars_rover, :vsn)
+    to_string(version)
+  end
 end
