@@ -12,7 +12,7 @@ defmodule MarsRoverTest do
       {{0, 0, :east}, [:move]}
     ]
 
-    assert MarsRover.process_deployments(plateau, deployments) == [
+    assert MarsRover.deploy(plateau, deployments) == [
              {:ok, {0, 1, :north}},
              {:error, :off_plateau},
              {:ok, {1, 0, :east}}
