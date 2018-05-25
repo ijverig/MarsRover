@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 mars_rover-*.tar
 
+# Ignore binaries
+mars_rover
