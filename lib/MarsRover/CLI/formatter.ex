@@ -11,5 +11,5 @@ defmodule MarsRover.Formatter do
   defp format_position({x, y, heading}), do: "#{x} #{y} #{heading}"
 
   defp format_error(:off_plateau), do: format_error("can't move rover outside the plateau")
-  defp format_error(message), do: "#{IO.ANSI.format([:red, message], true)}"
+  defp format_error(message), do: "#{IO.ANSI.format([:red, "Error: ", message], true)}"
 end
