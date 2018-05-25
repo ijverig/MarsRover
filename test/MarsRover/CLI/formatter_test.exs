@@ -12,8 +12,8 @@ defmodule MarsRover.FormatterTest do
 
     assert Formatter.format_results(results) == """
            1 5 S
-           #{IO.ANSI.format([:red, "Error: can't move rover outside the plateau"], true)}
-           #{IO.ANSI.format([:red, "Error: another rover is on the way"], true)}\
+           #{IO.ANSI.format([:red, "Error: can't move rover outside the plateau"])}
+           #{IO.ANSI.format([:red, "Error: another rover is on the way"])}\
            """
   end
 end

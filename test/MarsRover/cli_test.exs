@@ -5,8 +5,8 @@ defmodule MarsRover.CLITest do
 
   alias MarsRover.CLI
 
-  @off_plateau_message IO.ANSI.format([:red, "Error: can't move rover outside the plateau"], true)
-  @collision_message IO.ANSI.format([:red, "Error: another rover is on the way"], true)
+  @off_plateau_message IO.ANSI.format([:red, "Error: can't move rover outside the plateau"])
+  @collision_message IO.ANSI.format([:red, "Error: another rover is on the way"])
 
   test "help information" do
     assert capture_io(fn ->

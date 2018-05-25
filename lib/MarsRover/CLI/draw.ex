@@ -14,7 +14,7 @@ defmodule MarsRover.Draw do
   end
 
   defp format_result(result) do
-    "#{IO.ANSI.format([:inverse, Formatter.format_result(result)], true)}\n"
+    "#{IO.ANSI.format([:inverse, Formatter.format_result(result)])}\n"
   end
 
   defp draw_plateau({x, y, heading}, {max_x, max_y}) do
