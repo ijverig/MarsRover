@@ -19,11 +19,12 @@ defmodule MarsRover.Deployments do
   defp do_deploy({:ok, position}, [], _plateau), do: {:ok, position}
   defp do_deploy(error, _commands, _plateau), do: error
 
-  defp validate_position({x, y, _heading}, {max_x, max_y})
-       when is_off_plateau(x, y, max_x, max_y),
-       do: {:error, :off_plateau}
-
-  defp validate_position(position, _plateau), do: {:ok, position}
+  defp validate_position(position, plateau, deployed) do
+    cond do
+      off_plateau?(position, plateau) -> {:error, :off_plateau}
+      true -> {:ok, position}
+    end
+  end
 
   defp next_position(position, :move), do: move(position)
   defp next_position(position, :left), do: rotate_left(position)
