@@ -9,8 +9,8 @@ defmodule MarsRover.Draw do
     format_result(result) <> draw_plateau(position, plateau)
   end
 
-  defp draw_result(error, plateau) do
-    format_result(error) <> draw_plateau({-1, -1, :nothing}, plateau)
+  defp draw_result(error, _plateau) do
+    format_result(error)
   end
 
   defp format_result(result) do
