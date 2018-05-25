@@ -1,8 +1,8 @@
 defmodule MarsRover.Formatter do
   def format_results(results), do: Enum.map_join(results, "\n", &format_result/1)
 
-  defp format_result({:ok, final_position}), do: final_position |> format_position()
-  defp format_result({:error, reason}), do: reason |> format_error()
+  def format_result({:ok, final_position}), do: final_position |> format_position()
+  def format_result({:error, reason}), do: reason |> format_error()
 
   defp format_position({x, y, :north}), do: format_position({x, y, "N"})
   defp format_position({x, y, :south}), do: format_position({x, y, "S"})
@@ -11,5 +11,5 @@ defmodule MarsRover.Formatter do
   defp format_position({x, y, heading}), do: "#{x} #{y} #{heading}"
 
   defp format_error(:off_plateau), do: format_error("can't move rover outside the plateau")
-  defp format_error(message), do: IO.ANSI.format([:red, message])
+  defp format_error(message), do: "#{IO.ANSI.format([:red, message], true)}"
 end
