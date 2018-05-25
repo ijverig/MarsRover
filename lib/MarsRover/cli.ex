@@ -42,7 +42,7 @@ defmodule MarsRover.CLI do
     |> Draw.draw_results(plateau)
   end
 
-  defp run({input, draw?}) do
+  defp run({input, _draw?}) do
     {plateau, deployments} = Parser.parse_input(input)
 
     MarsRover.deploy(plateau, deployments)
