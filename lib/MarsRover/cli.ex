@@ -5,11 +5,17 @@ defmodule MarsRover.CLI do
     args |> parse_args() |> run() |> output()
   end
 
-  defp parse_args(["--help"]), do: :help
-  defp parse_args(["--version"]), do: :version
-  defp parse_args([file]), do: File.read!(file)
-  defp parse_args([]), do: IO.read(:all)
-  defp parse_args(_), do: :help
+  defp parse_args(args) do
+    switches = [help: :boolean, version: :boolean]
+    aliases = [h: :help, v: :version]
+
+    case OptionParser.parse(args, aliases: aliases, strict: switches) do
+      {[{switch, true}], _, _} -> switch
+      {_, [file], _} -> File.read!(file)
+      {_, [], _} -> IO.read(:all)
+      _ -> :help
+    end
+  end
 
   defp run(:help) do
     """
