@@ -1,18 +1,19 @@
 defmodule MarsRover.CLI do
-  alias MarsRover.{Parser, Formatter}
+  alias MarsRover.{Parser, Formatter, Draw}
 
   def main(args) do
     args |> parse_args() |> run() |> output()
   end
 
   defp parse_args(args) do
-    switches = [help: :boolean, version: :boolean]
+    switches = [help: :boolean, version: :boolean, draw: :boolean]
     aliases = [h: :help, v: :version]
 
     case OptionParser.parse(args, aliases: aliases, strict: switches) do
-      {[{switch, true}], _, _} -> switch
-      {_, [file], _} -> File.read!(file)
-      {_, [], _} -> IO.read(:all)
+      {[help: true], [], _} -> :help
+      {[version: true], [], _} -> :version
+      {options, [file], _} -> {File.read!(file), options[:draw]}
+      {options, [], _} -> {IO.read(:all), options[:draw]}
       _ -> :help
     end
   end
@@ -34,7 +35,14 @@ defmodule MarsRover.CLI do
     "MarsRover v" <> MarsRover.version()
   end
 
-  defp run(input) do
+  defp run({input, true}) do
+    {plateau, deployments} = Parser.parse_input(input)
+
+    MarsRover.deploy(plateau, deployments)
+    |> Draw.draw_results(plateau)
+  end
+
+  defp run({input, draw?}) do
     {plateau, deployments} = Parser.parse_input(input)
 
     MarsRover.deploy(plateau, deployments)
