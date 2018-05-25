@@ -1,27 +1,29 @@
 defmodule MarsRover.Deployments do
-  import MarsRover.{Controls, Plateau}
+  import MarsRover.Controls
+  alias MarsRover.Plateau
 
   def deploy_several(deployments, plateau, deployed \\ [])
 
   def deploy_several([], _plateau, deployed), do: Enum.reverse(deployed)
 
   def deploy_several([{position, commands} | remaining], plateau, deployed) do
-    result = deploy(position, commands, plateau)
+    result = deploy(position, commands, plateau, deployed)
     deploy_several(remaining, plateau, [result | deployed])
   end
 
-  def deploy(position, commands, plateau),
-    do: validate_position(position, plateau) |> do_deploy(commands, plateau)
+  def deploy(position, commands, plateau, deployed),
+    do: validate_position(position, plateau, deployed) |> do_deploy(commands, plateau, deployed)
 
-  defp do_deploy({:ok, position}, [command | remaining], plateau),
-    do: next_position(position, command) |> deploy(remaining, plateau)
+  defp do_deploy({:ok, position}, [command | remaining], plateau, deployed),
+    do: next_position(position, command) |> deploy(remaining, plateau, deployed)
 
-  defp do_deploy({:ok, position}, [], _plateau), do: {:ok, position}
-  defp do_deploy(error, _commands, _plateau), do: error
+  defp do_deploy({:ok, position}, [], _plateau, _deployed), do: {:ok, position}
+  defp do_deploy(error, _commands, _plateau, _deployed), do: error
 
   defp validate_position(position, plateau, deployed) do
     cond do
-      off_plateau?(position, plateau) -> {:error, :off_plateau}
+      Plateau.off_plateau?(position, plateau) -> {:error, :off_plateau}
+      Plateau.in_collision?(position, deployed) -> {:error, :collision}
       true -> {:ok, position}
     end
   end

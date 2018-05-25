@@ -3,8 +3,6 @@ defmodule MarsRover.PlateauTest do
 
   alias MarsRover.Plateau
 
-  require Plateau
-
   describe "a 1by1 plateau - valid positions: x = 0, y = 0" do
     @plateau1x1 {0, 0}
 
@@ -50,6 +48,20 @@ defmodule MarsRover.PlateauTest do
 
     test "4,3,W is on the plateau" do
       refute Plateau.off_plateau?({4, 3, :east}, @plateau5x4)
+    end
+  end
+
+  describe "collision validation" do
+    @already_deployed [{:ok, {1, 2, :east}}, {:error, :collision}, {:ok, {4, 1, :south}}]
+
+    test "in collision" do
+      assert Plateau.in_collision?({1, 2, :north}, [{:ok, {1, 2, :east}}])
+      assert Plateau.in_collision?({4, 1, :west}, @already_deployed)
+    end
+
+    test "not in collision" do
+      refute Plateau.in_collision?({1, 2, :north}, [])
+      refute Plateau.in_collision?({1, 4, :west}, @already_deployed)
     end
   end
 end
