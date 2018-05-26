@@ -20,7 +20,8 @@ defmodule MarsRover.MixProject do
 
   defp deps do
     [
-      {:mix_test_watch, "~> 0.6", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 0.6", only: :dev, runtime: false},
+      {:credo, "~> 0.9.2", only: [:dev, :test], runtime: false}
     ]
   end
 
