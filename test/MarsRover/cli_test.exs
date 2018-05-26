@@ -2,7 +2,6 @@ defmodule MarsRover.CLITest do
   use ExUnit.Case, async: false
 
   import ExUnit.CaptureIO
-
   alias MarsRover.CLI
 
   @off_plateau_message IO.ANSI.format([:red, "Error: can't move rover outside the plateau"])

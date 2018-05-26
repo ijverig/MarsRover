@@ -18,12 +18,10 @@ defmodule MarsRover.Draw do
   end
 
   defp draw_plateau({x, y, heading}, {max_x, max_y}) do
-    to_string(
-      for row <- max_y..0,
-          col <- 0..max_x do
-        tile({col, row}, {x, y}, heading) <> new_line_or_space(col, max_x)
-      end
-    )
+    for row <- max_y..0,
+        col <- 0..max_x,
+        into: "",
+        do: tile({col, row}, {x, y}, heading) <> new_line_or_space(col, max_x)
   end
 
   defp tile({x, y}, {x, y}, heading), do: arrow(heading)

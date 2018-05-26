@@ -12,10 +12,10 @@ defmodule MarsRover.Deployments do
   end
 
   def deploy(position, commands, plateau, deployed),
-    do: validate_position(position, plateau, deployed) |> do_deploy(commands, plateau, deployed)
+    do: position |> validate_position(plateau, deployed) |> do_deploy(commands, plateau, deployed)
 
   defp do_deploy({:ok, position}, [command | remaining], plateau, deployed),
-    do: next_position(position, command) |> deploy(remaining, plateau, deployed)
+    do: position |> next_position(command) |> deploy(remaining, plateau, deployed)
 
   defp do_deploy({:ok, position}, [], _plateau, _deployed), do: {:ok, position}
   defp do_deploy(error, _commands, _plateau, _deployed), do: error
