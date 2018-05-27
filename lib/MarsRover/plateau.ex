@@ -1,7 +1,9 @@
 defmodule MarsRover.Plateau do
+  use Agent
+
   defstruct limits: {0, 0}, deployed: []
 
-  def start(limits), do: Agent.start(fn -> %__MODULE__{limits: limits} end, name: :plateau)
+  def start_link(limits), do: Agent.start_link(fn -> %__MODULE__{limits: limits} end, name: :plateau)
 
   def stop, do: Agent.stop(:plateau)
 

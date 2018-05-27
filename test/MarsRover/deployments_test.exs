@@ -4,11 +4,8 @@ defmodule MarsRover.DeploymentsTest do
   alias MarsRover.Deployments, as: D
 
   setup do
-    MarsRover.Plateau.start({4, 6})
-
-    on_exit(fn ->
-      MarsRover.Plateau.stop()
-    end)
+    start_supervised!({MarsRover.Plateau, {4, 6}})
+    :ok
   end
 
   test "move north from 0,0,N" do

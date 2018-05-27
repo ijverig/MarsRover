@@ -5,15 +5,12 @@ defmodule MarsRover.PlateauTest do
 
   describe "the Plateau agent" do
     setup do
-      Plateau.start({6, 4})
-
-      on_exit(fn ->
-        Plateau.stop()
-      end)
+      start_supervised!({MarsRover.Plateau, {6, 4}})
+      :ok
     end
 
     test "already initialized" do
-      assert {:error, {:already_started, _pid}} = Plateau.start({6, 4})
+      assert {:error, {:already_started, _pid}} = Plateau.start_link({6, 4})
     end
 
     test "initial values" do
@@ -30,11 +27,8 @@ defmodule MarsRover.PlateauTest do
 
   describe "a 1by1 plateau - valid positions: x = 0, y = 0" do
     setup do
-      Plateau.start({0, 0})
-
-      on_exit(fn ->
-        Plateau.stop()
-      end)
+      start_supervised!({MarsRover.Plateau, {0, 0}})
+      :ok
     end
 
     test "0,1,W is off the plateau" do
@@ -52,11 +46,8 @@ defmodule MarsRover.PlateauTest do
 
   describe "a 5by4 plateau - valid positions: x ∈ 0..4, y ∈ 0..3" do
     setup do
-      Plateau.start({4, 3})
-
-      on_exit(fn ->
-        Plateau.stop()
-      end)
+      start_supervised!({MarsRover.Plateau, {4, 3}})
+      :ok
     end
 
     test "5,4,S is off the plateau" do
@@ -90,11 +81,8 @@ defmodule MarsRover.PlateauTest do
 
   describe "collision validation" do
     setup do
-      Plateau.start({4, 3})
-
-      on_exit(fn ->
-        Plateau.stop()
-      end)
+      start_supervised!({MarsRover.Plateau, {4, 3}})
+      :ok
     end
 
     test "in collision" do

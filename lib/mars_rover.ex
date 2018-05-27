@@ -2,11 +2,8 @@ defmodule MarsRover do
   alias MarsRover.{Deployments, Plateau}
 
   def deploy(plateau_limits, deployments) do
-    Plateau.start(plateau_limits)
-    results = Deployments.deploy_several(deployments)
-    Plateau.stop()
-
-    results
+    Plateau.start_link(plateau_limits)
+    Deployments.deploy_several(deployments)
   end
 
   def version, do: Keyword.get(Mix.Project.config(), :version)
