@@ -26,6 +26,8 @@ defmodule MarsRover.MixProject do
   end
 
   defp escript do
-    [main_module: MarsRover.CLI, emu_args: "-elixir ansi_enabled true"]
+    [
+      main_module: MarsRover.CLI, emu_args: "-elixir ansi_enabled true"
+    ]
   end
 end

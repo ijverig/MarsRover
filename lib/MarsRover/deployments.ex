@@ -9,8 +9,7 @@ defmodule MarsRover.Deployments do
     deploy_several(remaining)
   end
 
-  def deploy(position, commands),
-    do: position |> validate_position() |> do_deploy(commands)
+  def deploy(position, commands), do: position |> validate_position() |> do_deploy(commands)
 
   defp do_deploy({:ok, position}, [command | remaining]),
     do: position |> next_position(command) |> deploy(remaining)
