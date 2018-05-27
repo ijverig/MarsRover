@@ -10,7 +10,7 @@ defmodule MarsRoverTest do
       {{0, 0, :east}, [:move]},
       {{1, 1, :south}, [:move]}
     ]
-    
+
     assert MarsRover.deploy(plateau, deployments) == [
              {:ok, {0, 1, :north}},
              {:error, :off_plateau},
