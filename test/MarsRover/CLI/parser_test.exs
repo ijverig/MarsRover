@@ -5,8 +5,8 @@ defmodule MarsRover.ParserTest do
 
   test "good input" do
     good_input = """
-    5 5
-    1 2 N
+    25 543
+    10 42 N
     LMLMLMLMM
     3 3 E
     MMRMMRMRRM
@@ -15,10 +15,25 @@ defmodule MarsRover.ParserTest do
     {plateau, deployments} = Parser.parse_input(good_input)
     [{rover1, commands1}, {rover2, commands2}] = deployments
 
-    assert plateau == {5, 5}
-    assert rover1 == {1, 2, :north}
+    assert plateau == {25, 543}
+    assert rover1 == {10, 42, :north}
     assert commands1 == ~W/left move left move left move left move move/a
     assert rover2 == {3, 3, :east}
     assert commands2 == ~W/move move right move move right move right right move/a
+  end
+
+  test "negative numbers plateau" do
+    input = """
+    -5 -3
+    1 2 N
+    LMLM
+    """
+
+    {plateau, deployments} = Parser.parse_input(input)
+    [{rover, commands}] = deployments
+
+    assert plateau == {5, 3}
+    assert rover == {1, 2, :north}
+    assert commands == ~W/left move left move/a
   end
 end

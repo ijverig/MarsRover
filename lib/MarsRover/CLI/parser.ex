@@ -12,6 +12,7 @@ defmodule MarsRover.Parser do
     plateau_input
     |> String.split()
     |> Enum.map(&String.to_integer/1)
+    |> Enum.map(&abs/1)
     |> List.to_tuple()
   end
 
