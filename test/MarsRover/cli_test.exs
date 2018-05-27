@@ -21,7 +21,7 @@ defmodule MarsRover.CLITest do
 
   test "input given as file argument" do
     assert capture_io(fn ->
-             CLI.main(["test/fixtures/good.input"])
+             CLI.main(["test/fixtures/file.input"])
            end) == "0 5 N\n#{@off_plateau_message}\n5 4 W\n#{@collision_message}\n"
   end
 
