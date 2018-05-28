@@ -16,12 +16,12 @@ defmodule MarsRover.PlateauTest do
     test "initial values" do
       assert Plateau.max_x() == 6
       assert Plateau.max_y() == 4
-      assert Plateau.already_deployed() == []
+      assert Plateau.deployed_list() == []
     end
 
     test "updates" do
       Plateau.add_deploy_result({:ok, {3, 5, :east}})
-      assert Plateau.already_deployed() == [{:ok, {3, 5, :east}}]
+      assert Plateau.deployed_list() == [{:ok, {3, 5, :east}}]
     end
   end
 

@@ -2,7 +2,7 @@ defmodule MarsRover.Deployments do
   import MarsRover.Controls
   alias MarsRover.Plateau
 
-  def deploy_several([]), do: Plateau.already_deployed()
+  def deploy_several([]), do: Plateau.deployed_list()
 
   def deploy_several([{position, commands} | remaining]) do
     deploy(position, commands) |> Plateau.add_deploy_result()
@@ -16,7 +16,7 @@ defmodule MarsRover.Deployments do
 
   defp do_deploy({:ok, position}, []), do: {:ok, position}
   defp do_deploy(error, _commands), do: error
-
+  
   defp validate_position(position) do
     cond do
       Plateau.off_plateau?(position) -> {:error, :off_plateau}

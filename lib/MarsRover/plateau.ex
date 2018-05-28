@@ -12,7 +12,7 @@ defmodule MarsRover.Plateau do
 
   def max_y, do: Agent.get(:plateau, fn %__MODULE__{limits: {_x, y}} -> y end)
 
-  def already_deployed, do: Agent.get(:plateau, fn plateau -> Enum.reverse(plateau.deployed) end)
+  def deployed_list, do: Agent.get(:plateau, fn plateau -> Enum.reverse(plateau.deployed) end)
 
   def add_deploy_result(result) do
     Agent.update(:plateau, fn plateau ->
@@ -25,7 +25,7 @@ defmodule MarsRover.Plateau do
   end
 
   def in_collision?({x, y, _heading}) do
-    Enum.any?(already_deployed(), fn
+    Enum.any?(deployed_list(), fn
       {:ok, {x2, y2, _heading}} -> {x, y} == {x2, y2}
       _error -> false
     end)
