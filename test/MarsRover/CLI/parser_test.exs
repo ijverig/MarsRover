@@ -36,4 +36,28 @@ defmodule MarsRover.ParserTest do
     assert rover == {1, 2, :north}
     assert commands == ~W/left move left move/a
   end
+
+  test "empty input" do
+    assert_raise BadInputError, fn -> Parser.parse_input("") end
+  end
+
+  test "empty input command" do
+    input = """
+    5 3
+    1 2 N
+    
+    """
+
+    assert_raise BadInputError, fn -> Parser.parse_input(input) end
+  end
+
+  test "bad input command" do
+    input = """
+    5 3
+    1 2 N
+    ++--
+    """
+
+    assert_raise BadInputError, fn -> Parser.parse_input(input) end
+  end
 end

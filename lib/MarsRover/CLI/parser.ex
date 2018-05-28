@@ -1,4 +1,6 @@
 defmodule MarsRover.Parser do
+  def parse_input(""), do: raise_input_error("empty input")
+  
   def parse_input(input) do
     input
     |> String.split("\n", trim: true)
@@ -17,6 +19,8 @@ defmodule MarsRover.Parser do
   end
 
   defp parse_deployments([]), do: []
+
+  defp parse_deployments([_position | []]), do: raise_input_error("no command given")
 
   defp parse_deployments([position_input | [commands_input | remaining_deployments]]) do
     rover_position = parse_position(position_input)
@@ -47,4 +51,11 @@ defmodule MarsRover.Parser do
   defp do_parse_command("M"), do: :move
   defp do_parse_command("L"), do: :left
   defp do_parse_command("R"), do: :right
+  defp do_parse_command(_), do: raise_input_error("bad command given")
+
+  defp raise_input_error(message), do: raise BadInputError, message: message
+end
+
+defmodule BadInputError do
+  defexception message: "bad input given"
 end
