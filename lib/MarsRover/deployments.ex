@@ -5,7 +5,7 @@ defmodule MarsRover.Deployments do
   def deploy_several([]), do: Plateau.deployed_list()
 
   def deploy_several([{position, commands} | remaining]) do
-    deploy(position, commands) |> Plateau.add_deploy_result()
+    position |> deploy(commands) |> Plateau.add_deploy_result()
     deploy_several(remaining)
   end
 

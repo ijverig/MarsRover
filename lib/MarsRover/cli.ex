@@ -35,19 +35,18 @@ defmodule MarsRover.CLI do
     "MarsRover v" <> MarsRover.version()
   end
 
-  defp run({input, true}) do
+  defp run({input, draw?}) do
     {plateau, deployments} = Parser.parse_input(input)
 
     MarsRover.deploy(plateau, deployments)
-    |> Draw.draw_results(plateau)
+    |> display_results(plateau, draw?)
   end
 
-  defp run({input, _draw?}) do
-    {plateau, deployments} = Parser.parse_input(input)
+  defp display_results(results, plateau, true),
+    do: results |> Draw.draw_results(plateau)
 
-    MarsRover.deploy(plateau, deployments)
-    |> Formatter.format_results()
-  end
+  defp display_results(results, _plateau, _draw?),
+    do: results |> Formatter.format_results()
 
   defp output(text), do: IO.puts(text)
 end
