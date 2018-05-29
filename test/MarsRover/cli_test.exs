@@ -19,6 +19,12 @@ defmodule MarsRover.CLITest do
            end) =~ "MarsRover v"
   end
 
+  test "bad arguments" do
+    assert capture_io(fn ->
+             CLI.main(["--bad-argument"])
+           end) =~ "Usage:\n\n    mars_rover --help"
+  end
+
   test "input given as file argument" do
     assert capture_io(fn ->
              CLI.main(["test/fixtures/file.input"])
