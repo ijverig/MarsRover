@@ -20,8 +20,11 @@ defmodule MarsRover.Draw do
     for row <- max_y..0,
         col <- 0..max_x,
         into: "",
-        do: tile({col, row}, position) <> new_line_or_space(col, max_x)
+        do: edge_if_first(col) <> tile({col, row}, position) <> new_line_or_space(col, max_x)
   end
+
+  defp edge_if_first(0), do: "┃ "
+  defp edge_if_first(_), do: ""
 
   defp tile({x, y}, {x, y, heading}), do: arrow(heading)
   defp tile(_, _), do: "."
