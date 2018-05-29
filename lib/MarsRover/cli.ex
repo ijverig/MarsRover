@@ -20,14 +20,17 @@ defmodule MarsRover.CLI do
 
   defp run(:help) do
     """
+    Process rovers in a given grid.
+
     Usage:
 
-        mars_rover --help      # Displays this usage information
-        mars_rover --version   # Displays the version of this app
-        mars_rover             # Process the standard input
-        mars_rover file        # Process the input file
-      
-    Process rovers in a given grid. \
+        mars_rover --help              # Displays this usage information
+        mars_rover --version           # Displays the version of this app
+        mars_rover [options]           # Process the standard input
+        mars_rover [options] <file>    # Process the input file
+
+        Options:
+            -d, --draw                 # Draw deployment results \
     """
   end
 
