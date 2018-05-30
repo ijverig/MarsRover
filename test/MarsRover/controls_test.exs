@@ -13,7 +13,6 @@ defmodule MarsRover.ControlsTest do
   test "rotations" do
     position_heading_north = {0, 0, :north}
     assert Controls.rotate_left(position_heading_north) == {0, 0, :west}
-
     assert Controls.rotate_right(position_heading_north) == {0, 0, :east}
 
     position_heading_south = {0, 0, :south}

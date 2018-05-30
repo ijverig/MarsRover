@@ -1,4 +1,4 @@
-defmodule MarsRover.Parser do
+defmodule MarsRover.CLI.Parser do
   def parse_input(""), do: raise_input_error("empty input")
   
   def parse_input(input) do

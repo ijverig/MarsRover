@@ -1,7 +1,7 @@
 defmodule MarsRover.FormatterTest do
   use ExUnit.Case, async: true
 
-  alias MarsRover.Formatter
+  alias MarsRover.CLI.Formatter
 
   test "returns right format" do
     results = [

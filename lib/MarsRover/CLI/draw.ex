@@ -1,5 +1,5 @@
-defmodule MarsRover.Draw do
-  alias MarsRover.Formatter
+defmodule MarsRover.CLI.Draw do
+  alias MarsRover.CLI.Formatter
 
   def draw_results(results, plateau) do
     Enum.map_join(results, "\n", &draw_result(&1, plateau))

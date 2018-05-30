@@ -1,7 +1,7 @@
 defmodule MarsRover.ParserTest do
   use ExUnit.Case, async: true
 
-  alias MarsRover.Parser
+  alias MarsRover.CLI.Parser
 
   test "good input" do
     good_input = """

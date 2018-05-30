@@ -1,5 +1,5 @@
 defmodule MarsRover.CLI do
-  alias MarsRover.{Parser, Formatter, Draw}
+  alias MarsRover.CLI.{Parser, Formatter, Draw}
 
   def main(args) do
     args |> parse_args() |> run() |> output()
@@ -45,11 +45,8 @@ defmodule MarsRover.CLI do
     |> display_results(plateau, draw?)
   end
 
-  defp display_results(results, plateau, true),
-    do: results |> Draw.draw_results(plateau)
-
-  defp display_results(results, _plateau, _draw?),
-    do: results |> Formatter.format_results()
+  defp display_results(results, plateau, true), do: results |> Draw.draw_results(plateau)
+  defp display_results(results, _plateau, _draw?), do: results |> Formatter.format_results()
 
   defp output(text), do: IO.puts(text)
 end

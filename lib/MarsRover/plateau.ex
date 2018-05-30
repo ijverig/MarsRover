@@ -6,8 +6,6 @@ defmodule MarsRover.Plateau do
   def start_link(limits),
     do: Agent.start_link(fn -> %__MODULE__{limits: limits} end, name: :plateau)
 
-  def stop, do: Agent.stop(:plateau)
-
   def max_x, do: Agent.get(:plateau, fn %__MODULE__{limits: {x, _y}} -> x end)
 
   def max_y, do: Agent.get(:plateau, fn %__MODULE__{limits: {_x, y}} -> y end)

@@ -38,8 +38,8 @@ defmodule MarsRover.CLITest do
   end
 
   test "resets tty formatting correctly" do
-    assert capture_io("2 2\n1 0 N\nLMMMM\n1 0 N\nM\n", fn ->
+    assert capture_io("2 2\n1 0 N\nLMMMM\n1 0 N\nMR\n", fn ->
              CLI.main([])
-           end) == "#{@off_plateau_message}\n1 1 N\n"
+           end) == "#{@off_plateau_message}\n1 1 E\n"
   end
 end
