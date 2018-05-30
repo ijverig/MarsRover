@@ -1,20 +1,23 @@
 defmodule MarsRover.CLI.Draw do
   alias MarsRover.CLI.Formatter
 
-  def draw_results(results, plateau) do
-    Enum.map_join(results, "\n", &draw_result(&1, plateau))
-  end
+  @off_plateau_message "Error: can't move rover outside the plateau"
+  @collision_message "Error: another rover is on the way"
 
-  defp draw_result({:ok, position} = result, plateau) do
-    format_result(result) <> draw_plateau(position, plateau)
-  end
+  def draw_results(results, plateau),
+    do: Enum.map_join(results, "\n", &draw_result(&1, plateau))
 
-  defp draw_result(error, _plateau) do
-    format_result(error)
-  end
+  defp draw_result({:ok, position} = result, plateau),
+    do: format_result(result, :normal) <> draw_plateau(position, plateau)
 
-  defp format_result(result),
-    do: "#{IO.ANSI.format([:inverse, Formatter.format_result(result)])}\n"
+  defp draw_result({:error, reason}, _plateau), do: format_result(reason, :red)
+
+  defp format_result(:off_plateau, color), do: do_format(@off_plateau_message, color)
+  defp format_result(:collision, color), do: do_format(@collision_message, color)
+  defp format_result(result, color), do: Formatter.format_result(result) |> do_format(color)
+
+  defp do_format(message, color), do: "#{IO.ANSI.format([:inverse, color, do_format(message)])}\n"
+  defp do_format(message), do: " #{String.pad_trailing(message, 55)}"
 
   defp draw_plateau(position, {max_x, max_y}) do
     for row <- max_y..0,
