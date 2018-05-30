@@ -1,4 +1,8 @@
 defmodule MarsRover.CLI.Formatter do
+  @moduledoc """
+  Formats final results to CLI output text.
+  """
+
   def format_results(results), do: Enum.map_join(results, "\n", &format_result/1)
 
   def format_result({:ok, final_position}), do: final_position |> format_position()

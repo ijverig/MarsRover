@@ -1,4 +1,8 @@
 defmodule MarsRover.Controls do
+  @moduledoc """
+  Controls is the rover engine: handles movements and actions.
+  """
+  
   def move({x, y, :north}), do: {x, y + 1, :north}
   def move({x, y, :south}), do: {x, y - 1, :south}
   def move({x, y, :west}), do: {x - 1, y, :west}

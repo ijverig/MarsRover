@@ -1,4 +1,8 @@
 defmodule MarsRover.CLI.Draw do
+  @moduledoc """
+  Formats final results to CLI output renderings of the plateau.
+  """
+
   alias MarsRover.CLI.Formatter
 
   @off_plateau_message "Error: can't move rover outside the plateau"

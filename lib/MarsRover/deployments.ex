@@ -1,4 +1,11 @@
 defmodule MarsRover.Deployments do
+  @moduledoc """
+  Module for working with rover deployments.
+
+  It takes the rovers positions and commands and process them,
+  giving back a list with the final positions.
+  """
+
   import MarsRover.Controls
   alias MarsRover.Plateau
 

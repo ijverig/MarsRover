@@ -1,4 +1,12 @@
 defmodule MarsRover.Plateau do
+  @moduledoc """
+  Plateau manages the state of the plateau: keeps its dimensions
+  and deployed rover positions.
+
+  Also has checkings for positions outside the plateau and collisions against
+  already deployed rovers.
+  """
+
   use Agent
 
   defstruct limits: {0, 0}, deployed: []

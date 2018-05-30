@@ -1,4 +1,13 @@
 defmodule MarsRover.CLI.Parser do
+  @moduledoc """
+  Parser takes care of input strings.
+  
+  It analyzes the input line by line and extracts its plateau info,
+  positions and commands.
+
+  Also fails for basic input errors like empty line, bad syntax and so on.
+  """
+
   def parse_input(""), do: raise_input_error("empty input")
   
   def parse_input(input) do

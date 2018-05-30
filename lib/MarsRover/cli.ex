@@ -1,4 +1,12 @@
 defmodule MarsRover.CLI do
+  @moduledoc """
+  CLI is the entrypoint for the escript.
+  
+  It takes the parameters passed from the command line and translates them into
+  the relevant execution: help or version info, file or standard input parsing
+  and processing.
+  """
+
   alias MarsRover.CLI.{Parser, Formatter, Draw}
 
   def main(args) do
