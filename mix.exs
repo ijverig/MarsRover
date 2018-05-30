@@ -8,6 +8,7 @@ defmodule MarsRover.MixProject do
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      test_coverage: [tool: ExCoveralls],
       escript: escript()
     ]
   end
@@ -21,7 +22,8 @@ defmodule MarsRover.MixProject do
   defp deps do
     [
       {:mix_test_watch, "~> 0.6", only: :dev, runtime: false},
-      {:credo, "~> 0.9.2", only: [:dev, :test], runtime: false}
+      {:credo, "~> 0.9.2", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.8", only: :test}
     ]
   end
 
