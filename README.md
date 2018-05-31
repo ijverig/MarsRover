@@ -74,4 +74,6 @@ Another approach to the problem would be to have it all as concurrent processes 
 
 A [WIP branch] with the option to animate output results.
 
+!["mars_rover --animate file" output](https://raw.githubusercontent.com/ijverig/MarsRover/master/screenshots/CLI-animate-file-example.gif)
+
 [WIP branch]: https://github.com/ijverig/MarsRover/tree/animation
