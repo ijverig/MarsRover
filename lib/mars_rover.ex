@@ -18,5 +18,6 @@ defmodule MarsRover do
     Deployments.deploy_several(deployments)
   end
 
-  def version, do: Keyword.get(Mix.Project.config(), :version)
+  @version Keyword.get(Mix.Project.config(), :version)
+  def version, do: @version
 end
