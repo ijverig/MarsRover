@@ -48,6 +48,7 @@ Usage:
 
     Options:
         -d, --draw                 # Draw deployment results
+        -a, --animate              # Animate deployment results
 ```
 
 ## Examples
